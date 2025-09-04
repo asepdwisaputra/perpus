@@ -21,11 +21,12 @@ class User extends CI_Controller
         // load model buku
         $this->load->model('Buku_model');
 
-        // ambil semua buku yang tersedia
-        $data['buku'] = $this->Buku_model->get_all_buku();
+        // ambil hanya buku yang stoknya lebih dari 0
+        $data['buku'] = $this->Buku_model->get_buku_tersedia();
 
         $this->load->view('user/katalog', $data);
     }
+
 
     public function katalog_search()
     {

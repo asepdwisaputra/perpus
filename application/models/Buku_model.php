@@ -62,4 +62,11 @@ class Buku_model extends CI_Model
         $this->db->where('no_buku', $no_buku);
         return $this->db->delete('buku');
     }
+
+    // ambil data buku >0 untuk user/katalog
+    public function get_buku_tersedia()
+    {
+        $this->db->where('stock >', 0);
+        return $this->db->get('buku')->result();
+    }
 }
