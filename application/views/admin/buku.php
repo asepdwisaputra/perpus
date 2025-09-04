@@ -120,6 +120,7 @@
                     <th>Penulis</th>
                     <th>Penerbit</th>
                     <th>Rak</th>
+                    <th>Stock</th>
                     <th>Aksi</th>
                   </tr>
                 </thead>
@@ -133,6 +134,7 @@
                       <td><?= $row->penulis ?></td>
                       <td><?= $row->penerbit ?></td>
                       <td><?= $row->rak ?></td>
+                      <td><?= $row->stock ?></td>
                       <td>
                         <!-- Tombol Edit -->
                         <button
