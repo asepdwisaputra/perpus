@@ -227,7 +227,7 @@
             <i class="bi bi-journal-bookmark card-icon"></i>
             <h5 class="card-title">Koleksi Buku</h5>
             <p class="card-text">
-              Ribuan koleksi buku cetak dan digital siap dibaca dan dipinjam.
+              Beragam koleksi buku siap dibaca dan dipinjam.
             </p>
           </div>
         </div>
@@ -249,8 +249,7 @@
             <i class="bi bi-headset card-icon"></i>
             <h5 class="card-title">Layanan Konsultasi</h5>
             <p class="card-text">
-              Bantuan pencarian informasi dan referensi dari staf
-              perpustakaan.
+              Support dari staf perpustakaan.
             </p>
           </div>
         </div>
