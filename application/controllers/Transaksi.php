@@ -46,18 +46,33 @@ class Transaksi extends CI_Controller
     // Ubah menjadi dikembalikan
     public function kembalikan()
     {
-        $id = $this->input->post('id_transaksi');
+        $id_transaksi = $this->input->post('id_transaksi');
 
-        // Update status menjadi 'dikembalikan'
-        $this->db->where('id_transaksi', $id);
-        $this->db->update('transaksi', [
-            'status' => 'dikembalikan',
-            'tanggal_kembali' => date('Y-m-d')
-        ]);
+        // Ambil data transaksi untuk tahu id_buku
+        $transaksi = $this->db->where('id_transaksi', $id_transaksi)
+            ->get('transaksi')
+            ->row();
+
+        if ($transaksi) {
+            $id_buku = $transaksi->id_buku;
+
+            // Update status transaksi menjadi 'dikembalikan'
+            $this->db->where('id_transaksi', $id_transaksi);
+            $this->db->update('transaksi', [
+                'status'          => 'dikembalikan',
+                'tanggal_kembali' => date('Y-m-d')
+            ]);
+
+            // Tambahkan stock buku +1
+            $this->db->set('stock', 'stock+1', FALSE);
+            $this->db->where('id_buku', $id_buku);
+            $this->db->update('buku');
+        }
 
         // Kembali ke halaman transaksi
         redirect('transaksi');
     }
+
 
     // Perpanjang tanggal dikembalikan menjadi +7 hari
     public function perpanjang()
@@ -111,6 +126,7 @@ class Transaksi extends CI_Controller
     public function tambah()
     {
         $id_anggota = $this->input->post('id_anggota');
+        $id_buku    = $this->input->post('id_buku');
 
         // Cek berapa buku yang sedang dipinjam oleh anggota ini
         $this->db->where('id_anggota', $id_anggota);
@@ -122,20 +138,38 @@ class Transaksi extends CI_Controller
             $this->session->set_flashdata('error', 'Peminjaman ditolak! Anggota ini sudah meminjam lebih dari 2 buku.');
             redirect('transaksi');
         } else {
-            // Jika masih boleh meminjam, lanjut insert
+            // Cek stock buku dulu sebelum meminjam
+            $stock = $this->db->select('stock')
+                ->where('id_buku', $id_buku)
+                ->get('buku')
+                ->row();
+
+            if (!$stock || $stock->stock <= 0) {
+                $this->session->set_flashdata('error', 'Stock buku habis! Peminjaman tidak dapat dilakukan.');
+                redirect('transaksi');
+            }
+
+            // Jika stock ada, lanjut insert transaksi
             $data = [
                 'id_anggota'      => $id_anggota,
-                'id_buku'         => $this->input->post('id_buku'),
+                'id_buku'         => $id_buku,
                 'tanggal_pinjam'  => $this->input->post('tanggal_pinjam'),
                 'tanggal_kembali' => $this->input->post('tanggal_kembali'),
                 'status'          => $this->input->post('status'),
             ];
 
             $this->db->insert('transaksi', $data);
+
+            // Kurangi stock buku (stock = stock - 1)
+            $this->db->set('stock', 'stock-1', FALSE);
+            $this->db->where('id_buku', $id_buku);
+            $this->db->update('buku');
+
             $this->session->set_flashdata('success', 'Peminjaman berhasil ditambahkan.');
             redirect('transaksi');
         }
     }
+
 
 
     // Cari Transaksi
