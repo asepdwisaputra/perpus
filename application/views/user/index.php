@@ -73,7 +73,7 @@
   <nav
     class="navbar navbar-expand-lg navbar-dark"
     style="background: linear-gradient(90deg, #0d6efd, #6610f2)">
-    <div class="container py-2">
+    <div class="container">
       <a
         class="navbar-brand d-flex align-items-center fw-bold"
         href="#"
@@ -152,7 +152,7 @@
   <div class="container text-center">
     <h1 class="fw-bold">Tentang Perpustakaan</h1>
     <p class="lead">
-      Perpustakaan Barul 'Ulum merupakan pusat informasi dan literasi di SMP
+      Perpustakaan Barul 'Ulum merupakan titik informasi dan literasi di SMP
       Istiqomah Sambas Purbalingga yang hadir untuk mendukung proses belajar
       mengajar serta menumbuhkan budaya baca bagi civitas sekolah.
     </p>
@@ -271,7 +271,7 @@
         <div class="col-md-3 col-6 mb-4">
           <div class="card h-100 shadow-sm">
             <img
-              src="https://bukukita.com/babacms/displaybuku/118303_f.jpg"
+              src="<?= base_url("assets/img/kartunfisika.webp") ?>"
               class="card-img-top"
               alt="Kartun Fisika" />
             <div class="card-body p-2">
@@ -282,7 +282,7 @@
         <div class="col-md-3 col-6 mb-4">
           <div class="card h-100 shadow-sm">
             <img
-              src="https://cdn.gramedia.com/uploads/items/9786024813338.jpg"
+              src="<?= base_url('assets/img/kartunkimia.webp') ?>"
               class="card-img-top"
               alt="Kartun Kimia" />
             <div class="card-body p-2">
@@ -293,7 +293,7 @@
         <div class="col-md-3 col-6 mb-4">
           <div class="card h-100 shadow-sm">
             <img
-              src="https://cdn.gramedia.com/uploads/picture_meta/2023/11/27/kjf6cgigkomf6sy9o5qauu.jpg"
+              src="<?= base_url('assets/img/filosofiteras.webp') ?>"
               class="card-img-top"
               alt="Filosofi Teras" />
             <div class="card-body p-2">
