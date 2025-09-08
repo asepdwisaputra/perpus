@@ -107,10 +107,12 @@
       </div>
       <div class="col-md-4 col-12 mb-3">
         <div class="card text-white bg-warning">
-          <div class="card-body">
-            <h5>Peminjam Aktif</h5>
-            <p><?= $total_peminjam; ?></p>
-          </div>
+          <a href="<?= base_url('transaksi'); ?>" style="color: white; text-decoration: none;">
+            <div class="card-body">
+              <h5>Peminjam Aktif</h5>
+              <p><?= $total_peminjam; ?></p>
+            </div>
+          </a>
         </div>
       </div>
     </div>
