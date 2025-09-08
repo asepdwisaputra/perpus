@@ -5,10 +5,13 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Perpustakaan Barul 'Ulum</title>
+
+  <!-- FavIcon -->
   <link
     rel="icon"
-    href="https://play-lh.googleusercontent.com/uAF15Nq_GbYjxFiRricfK5x18Y5Zu8WhJr65GukdZtmsuaHVk3cNxE8e3S7LO6XMTJc"
-    type="image/png" />
+    href="<?= base_url('assets/img/LogoSMP.webp') ?>"
+    type="image/webp">
+
   <link
     href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
     rel="stylesheet" />

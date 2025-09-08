@@ -8,10 +8,12 @@
   <!-- BS Icon -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
 
+  <!-- FavIcon -->
   <link
     rel="icon"
-    href="https://play-lh.googleusercontent.com/uAF15Nq_GbYjxFiRricfK5x18Y5Zu8WhJr65GukdZtmsuaHVk3cNxE8e3S7LO6XMTJc"
-    type="image/png" />
+    href="<?= base_url('assets/img/LogoSMP.webp') ?>"
+    type="image/webp">
+
   <link
     href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
     rel="stylesheet" />

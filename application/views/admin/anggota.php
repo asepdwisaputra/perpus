@@ -11,10 +11,11 @@
   <link rel="stylesheet" href="<?php echo base_url('assets/admin/css/style.css'); ?>" />
   <script src="<?= base_url('assets/admin/js/script.js'); ?>"></script>
 
-
-
-  <!-- Favicon -->
-  <link rel="icon" type="image/png" href="https://tse4.mm.bing.net/th?id=OIP.pTrDvyZYuYmCE1Op-cARRwHaHa&pid=Api&P=0&h=220">
+  <!-- FavIcon -->
+  <link
+    rel="icon"
+    href="<?= base_url('assets/img/LogoSMP.webp') ?>"
+    type="image/webp">
 </head>
 
 <body>
