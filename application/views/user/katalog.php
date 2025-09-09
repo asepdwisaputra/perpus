@@ -5,19 +5,16 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Katalog Buku</title>
-  <!-- BS Icon -->
+
+  <!-- Bootstrap Icon -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
 
   <!-- FavIcon -->
-  <link
-    rel="icon"
-    href="<?= base_url('assets/img/LogoSMP.webp') ?>"
-    type="image/webp">
+  <link rel="icon" href="<?= base_url('assets/img/LogoSMP.webp') ?>" type="image/webp">
 
-  <link
-    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
-    rel="stylesheet" />
-  <link rel="stylesheet" href="<?php echo base_url('assets/admin/css/style.css'); ?>" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="<?= base_url('assets/admin/css/style.css'); ?>" />
+
   <style>
     html,
     body {
@@ -58,6 +55,24 @@
   </nav>
 
   <div class="container mt-5">
+
+    <!-- 🔥 Flashdata dengan animasi fade bawaan Bootstrap -->
+    <?php if ($this->session->flashdata('success')): ?>
+      <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <i class="bi bi-check-circle-fill"></i>
+        <?= $this->session->flashdata('success'); ?>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+    <?php endif; ?>
+
+    <?php if ($this->session->flashdata('error')): ?>
+      <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <i class="bi bi-exclamation-triangle-fill"></i>
+        <?= $this->session->flashdata('error'); ?>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+    <?php endif; ?>
+
     <h2 class="text-center">Katalog Buku</h2>
     <p class="text-center mb-4">
       Jelajahi koleksi buku di Perpustakaan Barul 'Ulum. Gunakan pencarian
@@ -99,9 +114,7 @@
               <td><?= $b->penerbit ?></td>
               <td><?= $b->rak ?></td>
               <td>
-                <button
-                  type="button"
-                  class="btn btn-sm btn-success"
+                <button type="button" class="btn btn-sm btn-success"
                   onclick="bukaForm('<?= $b->id_buku ?>', '<?= htmlspecialchars($b->judul, ENT_QUOTES) ?>')">
                   Pinjam
                 </button>
@@ -109,7 +122,6 @@
             </tr>
           <?php endforeach; ?>
         </tbody>
-
       </table>
       <p class="mb-4">
         <i>hanya menampilkan buku dengan status tersedia</i>
@@ -118,23 +130,14 @@
   </div>
 
   <!-- Modal Peminjaman -->
-  <div
-    class="modal fade"
-    id="modalPinjam"
-    tabindex="-1"
-    aria-labelledby="modalPinjamLabel"
-    aria-hidden="true">
+  <div class="modal fade" id="modalPinjam" tabindex="-1" aria-labelledby="modalPinjamLabel" aria-hidden="true">
     <div class="modal-dialog">
       <form action="<?= base_url('pemesanan/pesan') ?>" method="post" class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="modalPinjamLabel">
             Formulir Pemesanan Buku
           </h5>
-          <button
-            type="button"
-            class="btn-close"
-            data-bs-dismiss="modal"
-            aria-label="Tutup"></button>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button>
         </div>
         <div class="modal-body">
           <div class="mb-3">
@@ -160,16 +163,21 @@
 
   <script>
     function bukaForm(id_buku, judul) {
-      // Isi field di modal
       document.getElementById('id_buku').value = id_buku;
       document.getElementById('buku').value = judul;
 
-      // Tampilkan modal
       var modal = new bootstrap.Modal(document.getElementById('modalPinjam'));
       modal.show();
     }
-  </script>
 
+    // Auto close flash message setelah 4 detik (pakai animasi Bootstrap bawaan)
+    setTimeout(() => {
+      document.querySelectorAll('.alert').forEach(el => {
+        let alertInstance = bootstrap.Alert.getOrCreateInstance(el);
+        alertInstance.close();
+      });
+    }, 4000);
+  </script>
 
   <!-- Footer -->
   <footer class="footer">
@@ -177,18 +185,6 @@
   </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-  <script>
-    function filterTable() {
-      const input = document
-        .getElementById("searchInput")
-        .value.toLowerCase();
-      const rows = document.querySelectorAll("#bookTable tbody tr");
-      rows.forEach((row) => {
-        const title = row.cells[1].textContent.toLowerCase();
-        row.style.display = title.includes(input) ? "" : "none";
-      });
-    }
-  </script>
 </body>
 
 </html>
