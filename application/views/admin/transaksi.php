@@ -111,10 +111,11 @@
           <div
             class="card-header bg-success text-white d-flex align-items-center gap-2 flex-nowrap">
             <!-- Tombol Unduh -->
-            <button class="btn btn-light flex-shrink-0" onclick="window.location.href='<?= base_url('transaksi/export') ?>'">
+            <button class="btn btn-light flex-shrink-0" data-bs-toggle="modal" data-bs-target="#modalUnduh">
               <i class="bi bi-download"></i>
               <span class="d-none d-md-inline">Unduh Data</span>
             </button>
+
 
             <!-- Form Pencarian Transaksi -->
             <form action="<?= base_url('transaksi/search') ?>" method="get" class="flex-grow-1">
@@ -392,6 +393,36 @@
 
             <div class="modal-footer">
               <button type="submit" class="btn btn-success">Simpan</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Modal Unduh Data dengan Rentang Tanggal -->
+    <div class="modal fade" id="modalUnduh" tabindex="-1" aria-labelledby="modalUnduhLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <form method="get" action="<?= base_url('transaksi/export') ?>"> <!-- 🔧 ganti method sesuai controller kamu -->
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="modalUnduhLabel">Unduh Data Transaksi</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <div class="mb-3">
+                <label for="tanggal_awal" class="form-label">Tanggal Awal</label>
+                <input type="date" class="form-control" id="tanggal_awal" name="tanggal_awal" required>
+              </div>
+              <div class="mb-3">
+                <label for="tanggal_akhir" class="form-label">Tanggal Akhir</label>
+                <input type="date" class="form-control" id="tanggal_akhir" name="tanggal_akhir" required>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+              <button type="submit" class="btn btn-success">
+                <i class="bi bi-download"></i> Unduh
+              </button>
             </div>
           </div>
         </form>

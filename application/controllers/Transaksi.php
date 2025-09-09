@@ -190,21 +190,39 @@ class Transaksi extends CI_Controller
         $this->load->view('admin/transaksi', $data);
     }
 
-    // Unduh Data Transaksi All
+    // Unduh Data Transaksi dengan Filter Rentang Tanggal
     public function export()
     {
         $this->load->helper('download');
         $this->load->database();
 
+        // Ambil input tanggal dari form modal (GET)
+        $tanggal_awal  = $this->input->get('tanggal_awal');
+        $tanggal_akhir = $this->input->get('tanggal_akhir');
+
+        // Query data transaksi + join tabel anggota & buku
         $this->db->select('transaksi.id_transaksi, anggota.nama AS nama_anggota, anggota.no_anggota, buku.judul AS judul_buku, buku.no_buku, transaksi.tanggal_pinjam, transaksi.tanggal_kembali, transaksi.status');
         $this->db->from('transaksi');
         $this->db->join('anggota', 'anggota.id_anggota = transaksi.id_anggota');
         $this->db->join('buku', 'buku.id_buku = transaksi.id_buku');
+
+        // Tambahkan filter jika tanggal_awal & tanggal_akhir diisi
+        if (!empty($tanggal_awal) && !empty($tanggal_akhir)) {
+            $this->db->where('transaksi.tanggal_pinjam >=', $tanggal_awal);
+            $this->db->where('transaksi.tanggal_pinjam <=', $tanggal_akhir);
+        }
+
         $query = $this->db->get();
 
         $delimiter = ",";
         $newline = "\r\n";
-        $filename = "data_transaksi.csv";
+
+        // Jika ada filter tanggal, ubah nama file agar jelas
+        if (!empty($tanggal_awal) && !empty($tanggal_akhir)) {
+            $filename = "data_transaksi_{$tanggal_awal}_sampai_{$tanggal_akhir}.csv";
+        } else {
+            $filename = "data_transaksi_all.csv";
+        }
 
         $data = '';
 
@@ -215,6 +233,13 @@ class Transaksi extends CI_Controller
         // Data rows
         foreach ($query->result_array() as $row) {
             $data .= implode($delimiter, $row) . $newline;
+        }
+
+        // Jika hasil kosong, bisa beri pesan sebelum download
+        if (empty($query->result_array())) {
+            $this->session->set_flashdata('error', 'Tidak ada data transaksi pada rentang tanggal yang dipilih.');
+            redirect('transaksi');
+            return;
         }
 
         force_download($filename, $data);
