@@ -23,7 +23,7 @@ class Whatsapp extends CI_Controller
             CURLOPT_POST => true,
             CURLOPT_POSTFIELDS => array(
                 'target' => $transaksi->telepon,
-                'message' => "Assalamu'alaikum,\n\nYth. Wali Kelas,\n\nKami informasikan bahwa siswa dengan detail berikut:\n\nNama       : {$transaksi->nama}\nJudul Buku : {$transaksi->judul}\n\nmemiliki keterlambatan pengembalian buku perpustakaan. Mohon informasi ini dapat diteruskan kepada yang bersangkutan atau orangtua murid agar segera mengembalikan buku tersebut.\n\nTerima kasih atas kerja samanya.\n\nTertanda,\nPerpustakaan SMP Istiqomah Sambas",
+                'message' => "Assalamu'alaikum,\n\nYth. Bapak/Ibu/Wali/Saudara/Saudari,\n\nKami informasikan bahwa siswa dengan detail berikut:\n\nNama       : {$transaksi->nama}\nJudul Buku : {$transaksi->judul}\n\nmemiliki keterlambatan pengembalian buku perpustakaan. Mohon informasi ini dapat diteruskan kepada yang bersangkutan agar segera mengembalikan buku tersebut.\n\nTerima kasih atas kerja samanya.\n\nTertanda,\nPerpustakaan SMP Istiqomah Sambas",
                 'countryCode' => '62',
             ),
             CURLOPT_HTTPHEADER => array(
