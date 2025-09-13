@@ -117,6 +117,7 @@ class Buku extends CI_Controller
             'penulis'  => $this->input->post('penulis'),
             'penerbit' => $this->input->post('penerbit'),
             'rak'      => $this->input->post('rak'),
+            'stock'      => $this->input->post('stock'),
         ];
 
         $this->db->where('no_buku', $no_buku_lama);

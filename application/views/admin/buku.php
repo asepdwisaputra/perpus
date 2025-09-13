@@ -144,7 +144,7 @@
                           class="btn btn-warning btn-sm"
                           data-bs-toggle="modal"
                           data-bs-target="#modalEditBuku"
-                          onclick="setEditBuku('<?= htmlspecialchars($row->no_buku, ENT_QUOTES) ?>', '<?= $row->judul ?>', '<?= $row->penulis ?>', '<?= $row->penerbit ?>', '<?= $row->rak ?>')">
+                          onclick="setEditBuku('<?= htmlspecialchars($row->no_buku, ENT_QUOTES) ?>', '<?= $row->judul ?>', '<?= $row->penulis ?>', '<?= $row->penerbit ?>', '<?= $row->rak ?>', '<?= $row->stock ?>')">
                           <i class="bi bi-pencil"></i> Edit
                         </button>
 
@@ -336,6 +336,10 @@
                 <label>No Rak</label>
                 <input type="number" class="form-control" name="rak" id="editRak" required>
               </div>
+              <div class="mb-3">
+                <label>Stock Buku</label>
+                <input type="number" class="form-control" name="stock" id="editStock" required>
+              </div>
             </div>
             <div class="modal-footer">
               <button type="submit" class="btn btn-success">Simpan Perubahan</button>
@@ -356,13 +360,14 @@
     <?php endif; ?>
 
     // EDIT BUKU berdasarkan No Buku - MODAL
-    function setEditBuku(no_buku, judul, penulis, penerbit, rak) {
+    function setEditBuku(no_buku, judul, penulis, penerbit, rak, stock) {
       document.getElementById("editNoBuku").value = no_buku;
       document.getElementById("editNoBukuLama").value = no_buku;
       document.getElementById("editJudulBuku").value = judul;
       document.getElementById("editPenulisBuku").value = penulis;
       document.getElementById("editPenerbitBuku").value = penerbit;
       document.getElementById("editRak").value = rak;
+      document.getElementById("editStock").value = stock;
     }
 
     // HAPUS BUKU berdasarkan No Buku - Modal
