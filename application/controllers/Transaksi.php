@@ -94,17 +94,40 @@ class Transaksi extends CI_Controller
         redirect('transaksi');
     }
 
-    // Update data peminjam
     public function update()
     {
         $id = $this->input->post('id_transaksi');
 
+        // Ambil data transaksi lama
+        $transaksi_lama = $this->db->get_where('transaksi', ['id_transaksi' => $id])->row();
+
         $data = [
-            'tanggal_pinjam' => $this->input->post('tanggal_pinjam'),
-            'tanggal_kembali' => $this->input->post('tanggal_kembali'),
-            'status' => $this->input->post('status')
+            'tanggal_pinjam'   => $this->input->post('tanggal_pinjam'),
+            'tanggal_kembali'  => $this->input->post('tanggal_kembali'),
+            'status'           => $this->input->post('status')
         ];
 
+        // Jika status berubah
+        if ($transaksi_lama->status != $data['status']) {
+            // Ambil id_buku dari transaksi lama
+            $id_buku = $transaksi_lama->id_buku;
+
+            // Jika status baru adalah 'dikembalikan', stok buku ditambah 1
+            if ($data['status'] == 'dikembalikan') {
+                $this->db->set('stock', 'stock+1', FALSE);
+                $this->db->where('id_buku', $id_buku);
+                $this->db->update('buku');
+            }
+
+            // Jika status baru adalah 'dipinjam' dari sebelumnya 'dikembalikan'
+            if ($data['status'] == 'dipinjam' && $transaksi_lama->status == 'dikembalikan') {
+                $this->db->set('stock', 'stock-1', FALSE);
+                $this->db->where('id_buku', $id_buku);
+                $this->db->update('buku');
+            }
+        }
+
+        // Update data transaksi
         $this->db->where('id_transaksi', $id);
         $this->db->update('transaksi', $data);
 
