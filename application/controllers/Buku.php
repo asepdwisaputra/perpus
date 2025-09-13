@@ -32,6 +32,7 @@ class Buku extends CI_Controller
             'penulis'  => $this->input->post('penulis'),
             'penerbit' => $this->input->post('penerbit'),
             'rak'      => $this->input->post('rak'),
+            'stock'      => $this->input->post('stock'),
         ];
 
         // Cek apakah ID Buku sudah terdaftar

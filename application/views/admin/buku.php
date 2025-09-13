@@ -283,6 +283,16 @@
                   required />
               </div>
 
+              <div class="mb-3">
+                <label class="form-label">Stock</label>
+                <input type="number"
+                  name="stock"
+                  class="form-control"
+                  placeholder="Masukkan Jumlah Stock Buku"
+                  value="<?= isset($old_input['stock']) ? $old_input['stock'] : '' ?>"
+                  required />
+              </div>
+
               <button type="submit" class="btn btn-success">Simpan Buku</button>
             </form>
             <!-- Form End -->
