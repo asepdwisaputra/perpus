@@ -15,7 +15,8 @@ class Whatsapp extends CI_Controller
         $this->load->model('Denda_model');
         $transaksi = $this->Denda_model->get_transaksi_by_id($id_transaksi);
 
-        // Kirim WA via cURL (Fonnte)
+        $pesan = "Assalamu'alaikum,\n\nYth. Bapak/Ibu/Wali/Saudara/Saudari,\n\nKami informasikan bahwa siswa dengan detail berikut:\n\nNama       : {$transaksi->nama}\nJudul Buku : {$transaksi->judul}\n\nmemiliki keterlambatan pengembalian buku perpustakaan. Mohon informasi ini dapat diteruskan kepada yang bersangkutan agar segera mengembalikan buku tersebut.\n\nTerima kasih atas kerja samanya.\n\nTertanda,\nPerpustakaan SMP Istiqomah Sambas";
+
         $curl = curl_init();
         curl_setopt_array($curl, array(
             CURLOPT_URL => 'https://api.fonnte.com/send',
@@ -23,7 +24,7 @@ class Whatsapp extends CI_Controller
             CURLOPT_POST => true,
             CURLOPT_POSTFIELDS => array(
                 'target' => $transaksi->telepon,
-                'message' => "Assalamu'alaikum,\n\nYth. Bapak/Ibu/Wali/Saudara/Saudari,\n\nKami informasikan bahwa siswa dengan detail berikut:\n\nNama       : {$transaksi->nama}\nJudul Buku : {$transaksi->judul}\n\nmemiliki keterlambatan pengembalian buku perpustakaan. Mohon informasi ini dapat diteruskan kepada yang bersangkutan agar segera mengembalikan buku tersebut.\n\nTerima kasih atas kerja samanya.\n\nTertanda,\nPerpustakaan SMP Istiqomah Sambas",
+                'message' => $pesan,
                 'countryCode' => '62',
             ),
             CURLOPT_HTTPHEADER => array(
@@ -32,13 +33,25 @@ class Whatsapp extends CI_Controller
         ));
 
         $response = curl_exec($curl);
-        curl_close($curl);
 
-        // Beri respon JSON ke AJAX
-        echo json_encode(['status' => true]);
+        if (curl_errno($curl)) {
+            $error_msg = curl_error($curl);
+            curl_close($curl);
+            echo json_encode(['status' => false, 'error' => $error_msg]);
+            return;
+        }
+
+        curl_close($curl);
+        $result = json_decode($response, true);
+
+        if (isset($result['status']) && $result['status'] == true) {
+            echo json_encode(['status' => true]);
+        } else {
+            echo json_encode(['status' => false, 'error' => $result['detail'] ?? 'Gagal kirim pesan']);
+        }
     }
 
-    // Fungsi private untuk mengirim WA
+    // Fungsi private untuk mengirim WA-- simpen aja dulu kali aja nanti butuh
     private function _send_wa($nomor, $pesan)
     {
         $curl = curl_init();
@@ -53,7 +66,7 @@ class Whatsapp extends CI_Controller
                 'countryCode' => '62',
             ),
             CURLOPT_HTTPHEADER => array(
-                'Authorization: Q3CNLUzuTYyEDFwxvjia' // Ganti dengan token kamu
+                'Authorization: Q3CNLUzuTYyEDFwxvjia' // Ini buat isi token
             ),
         ));
 

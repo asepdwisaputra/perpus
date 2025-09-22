@@ -216,20 +216,32 @@
         fetch(url)
           .then(response => response.json())
           .then(data => {
-            if (data.status) {
-              const alertBox = document.getElementById('alertBox');
-              alertBox.textContent = "WhatsApp berhasil dikirim!";
-              alertBox.classList.remove('d-none');
+            const alertBox = document.getElementById('alertBox');
 
-              setTimeout(() => {
-                alertBox.classList.add('d-none');
-              }, 1000); // Sembunyikan setelah 3 detik
+            if (data.status) {
+              alertBox.textContent = "✅ WhatsApp berhasil dikirim!";
+              alertBox.classList.remove('d-none', 'alert-danger');
+              alertBox.classList.add('alert-success');
             } else {
-              alert("Gagal mengirim WhatsApp.");
+              alertBox.textContent = "❌ Gagal mengirim WhatsApp: " + (data.error || "Unknown error");
+              alertBox.classList.remove('d-none', 'alert-success');
+              alertBox.classList.add('alert-danger');
             }
+
+            // Sembunyikan otomatis setelah 3 detik
+            setTimeout(() => {
+              alertBox.classList.add('d-none');
+            }, 3000);
           })
           .catch(error => {
-            alert("Terjadi kesalahan saat mengirim.");
+            const alertBox = document.getElementById('alertBox');
+            alertBox.textContent = "⚠️ Terjadi kesalahan: " + error;
+            alertBox.classList.remove('d-none', 'alert-success');
+            alertBox.classList.add('alert-danger');
+
+            setTimeout(() => {
+              alertBox.classList.add('d-none');
+            }, 3000);
           });
       });
     });
