@@ -25,7 +25,6 @@
 
   <!-- DataTables FixedHeader CSS -->
   <link rel="stylesheet" href="https://cdn.datatables.net/fixedheader/3.4.0/css/fixedHeader.bootstrap5.min.css">
-
 </head>
 
 <body>
