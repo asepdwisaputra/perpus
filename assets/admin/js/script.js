@@ -138,13 +138,7 @@ function cariBukuEdit() {
 	}
 }
 
-// EDIT ANGGOTA berdasar No Anggota - MODAL
-function setEditData(nama, noAnggota, telepon) {
-	document.getElementById("editNama").value = nama;
-	document.getElementById("editNoAnggota").value = noAnggota;
-	document.getElementById("editNoAnggotaLama").value = noAnggota; // digunakan di WHERE
-	document.getElementById("editTelepon").value = telepon;
-}
+// EDIT ANGGOTA berdasar No Anggota - MODAL ---> Pindah di bawah view/admin/anggota.php
 
 // HAPUS ANGGOTA berdasarkan No Anggota - Modal
 function setDeleteData(noAnggota) {

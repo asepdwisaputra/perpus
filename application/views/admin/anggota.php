@@ -127,13 +127,24 @@
                     <td><?= $row->telepon ?></td>
                     <td>
                       <!-- Tombol Edit -->
-                      <button
+                      <!-- <button
                         class="btn btn-warning btn-sm"
                         data-bs-toggle="modal"
                         data-bs-target="#modalEditAnggota"
                         onclick="setEditData('<?= htmlspecialchars($row->nama, ENT_QUOTES) ?>', '<?= $row->no_anggota ?>', '<?= $row->telepon ?>')">
                         <i class="bi bi-pencil"></i> Edit
+                      </button> -->
+                      <button
+                        class="btn btn-warning btn-sm"
+                        data-bs-toggle="modal"
+                        data-bs-target="#modalEditAnggota"
+                        data-nama="<?= htmlspecialchars($row->nama, ENT_QUOTES) ?>"
+                        data-no_anggota="<?= htmlspecialchars($row->no_anggota, ENT_QUOTES) ?>"
+                        data-telepon="<?= htmlspecialchars($row->telepon, ENT_QUOTES) ?>"
+                        onclick="setEditData(this)">
+                        <i class="bi bi-pencil"></i> Edit
                       </button>
+
 
                       <!-- Tombol Hapus -->
                       <button class="btn btn-danger btn-sm"
@@ -280,6 +291,18 @@
       var modalTambah = new bootstrap.Modal(document.getElementById('modalTambahAnggota'));
       modalTambah.show();
     <?php endif; ?>
+
+    // EDIT ANGGOTA berdasar No Anggota - MODAL
+    function setEditData(btn) {
+      const nama = btn.dataset.nama;
+      const noAnggota = btn.dataset.no_anggota;
+      const telepon = btn.dataset.telepon;
+
+      document.getElementById("editNama").value = nama;
+      document.getElementById("editNoAnggota").value = noAnggota;
+      document.getElementById("editNoAnggotaLama").value = noAnggota; // tetap dipakai di WHERE
+      document.getElementById("editTelepon").value = telepon;
+    }
   </script>
 
 </body>

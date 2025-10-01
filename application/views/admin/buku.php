@@ -140,13 +140,27 @@
                       <td><?= $row->stock ?></td>
                       <td>
                         <!-- Tombol Edit -->
-                        <button
+                        <!-- <button
                           class="btn btn-warning btn-sm"
                           data-bs-toggle="modal"
                           data-bs-target="#modalEditBuku"
                           onclick="setEditBuku('<?= htmlspecialchars($row->no_buku, ENT_QUOTES) ?>', '<?= $row->judul ?>', '<?= $row->penulis ?>', '<?= $row->penerbit ?>', '<?= $row->rak ?>', '<?= $row->stock ?>')">
                           <i class="bi bi-pencil"></i> Edit
+                        </button> -->
+                        <button
+                          class="btn btn-warning btn-sm"
+                          data-bs-toggle="modal"
+                          data-bs-target="#modalEditBuku"
+                          data-no_buku="<?= htmlspecialchars($row->no_buku, ENT_QUOTES) ?>"
+                          data-judul="<?= htmlspecialchars($row->judul, ENT_QUOTES) ?>"
+                          data-penulis="<?= htmlspecialchars($row->penulis, ENT_QUOTES) ?>"
+                          data-penerbit="<?= htmlspecialchars($row->penerbit, ENT_QUOTES) ?>"
+                          data-rak="<?= htmlspecialchars($row->rak, ENT_QUOTES) ?>"
+                          data-stock="<?= htmlspecialchars($row->stock, ENT_QUOTES) ?>"
+                          onclick="setEditBuku(this)">
+                          <i class="bi bi-pencil"></i> Edit
                         </button>
+
 
                         <!-- Tombol Hapus -->
                         <button
@@ -360,15 +374,25 @@
     <?php endif; ?>
 
     // EDIT BUKU berdasarkan No Buku - MODAL
-    function setEditBuku(no_buku, judul, penulis, penerbit, rak, stock) {
-      document.getElementById("editNoBuku").value = no_buku;
-      document.getElementById("editNoBukuLama").value = no_buku;
-      document.getElementById("editJudulBuku").value = judul;
-      document.getElementById("editPenulisBuku").value = penulis;
-      document.getElementById("editPenerbitBuku").value = penerbit;
-      document.getElementById("editRak").value = rak;
-      document.getElementById("editStock").value = stock;
+    // function setEditBuku(no_buku, judul, penulis, penerbit, rak, stock) {
+    //   document.getElementById("editNoBuku").value = no_buku;
+    //   document.getElementById("editNoBukuLama").value = no_buku;
+    //   document.getElementById("editJudulBuku").value = judul;
+    //   document.getElementById("editPenulisBuku").value = penulis;
+    //   document.getElementById("editPenerbitBuku").value = penerbit;
+    //   document.getElementById("editRak").value = rak;
+    //   document.getElementById("editStock").value = stock;
+    // }
+    function setEditBuku(btn) {
+      document.getElementById("editNoBuku").value = btn.dataset.no_buku;
+      document.getElementById("editNoBukuLama").value = btn.dataset.no_buku;
+      document.getElementById("editJudulBuku").value = btn.dataset.judul;
+      document.getElementById("editPenulisBuku").value = btn.dataset.penulis;
+      document.getElementById("editPenerbitBuku").value = btn.dataset.penerbit;
+      document.getElementById("editRak").value = btn.dataset.rak;
+      document.getElementById("editStock").value = btn.dataset.stock;
     }
+
 
     // HAPUS BUKU berdasarkan No Buku - Modal
     function setDeleteBuku(noBuku) {

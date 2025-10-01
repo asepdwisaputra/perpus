@@ -13,7 +13,7 @@
   <link rel="icon" href="<?= base_url('assets/img/LogoSMP.webp') ?>" type="image/webp">
 
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
-  <!-- <link rel="stylesheet" href="<?= base_url('assets/admin/css/style.css'); ?>" /> -->
+  <link rel="stylesheet" href="<?= base_url('assets/admin/css/style.css'); ?>" />
 
   <style>
     html,
