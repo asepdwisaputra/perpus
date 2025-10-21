@@ -137,13 +137,31 @@ class Transaksi extends CI_Controller
     // Hapus Data Transaksi
     public function delete()
     {
-        $id = $this->input->post('id_transaksi');
+        $id_transaksi = $this->input->post('id_transaksi');
 
-        $this->db->where('id_transaksi', $id);
-        $this->db->delete('transaksi');
+        // 1. Ambil data transaksi berdasarkan id
+        $transaksi = $this->db->get_where('transaksi', ['id_transaksi' => $id_transaksi])->row_array();
 
+        if ($transaksi) {
+            $id_buku = $transaksi['id_buku'];
+            $status = strtolower(trim($transaksi['status'])); // pastikan lowercase agar mudah dicek
+
+            // 2. Jika status BUKAN 'dikembalikan', maka kembalikan stok buku (+1)
+            if ($status !== 'dikembalikan') {
+                $this->db->set('stock', 'stock + 1', FALSE);
+                $this->db->where('id_buku', $id_buku);
+                $this->db->update('buku');
+            }
+
+            // 3. Hapus data transaksi
+            $this->db->where('id_transaksi', $id_transaksi);
+            $this->db->delete('transaksi');
+        }
+
+        // 4. Redirect kembali ke halaman transaksi
         redirect('transaksi');
     }
+
 
     // Tambah Transaksi
     public function tambah()
