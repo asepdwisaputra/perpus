@@ -112,7 +112,7 @@
                 <tr>
                   <th>No</th>
                   <th>Nama</th>
-                  <th>Nomor Anggota</th>
+                  <th>Nomor Induk</th>
                   <th>Nomor Telepon</th>
                   <th>Aksi</th>
                 </tr>
@@ -188,7 +188,7 @@
                 value="<?= isset($old_input['nama']) ? $old_input['nama'] : '' ?>" required />
             </div>
             <div class="mb-3">
-              <label class="form-label">Nomor Anggota</label>
+              <label class="form-label">Nomor Induk</label>
               <input type="text" name="no_anggota" class="form-control <?= isset($form_error) ? 'is-invalid' : '' ?>"
                 placeholder="Masukkan Nomor Anggota"
                 value="<?= isset($old_input['no_anggota']) ? $old_input['no_anggota'] : '' ?>" required />
@@ -231,7 +231,7 @@
               <input type="text" class="form-control" name="nama" id="editNama" required>
             </div>
             <div class="mb-3">
-              <label>Nomor Anggota</label>
+              <label>Nomor Induk</label>
               <input type="text" class="form-control" name="no_anggota" id="editNoAnggota" required>
             </div>
             <div class="mb-3">
@@ -292,7 +292,7 @@
       modalTambah.show();
     <?php endif; ?>
 
-    // EDIT ANGGOTA berdasar No Anggota - MODAL
+    // EDIT ANGGOTA berdasar No Induk Anggota - MODAL
     function setEditData(btn) {
       const nama = btn.dataset.nama;
       const noAnggota = btn.dataset.no_anggota;

@@ -149,7 +149,7 @@
         </div>
         <div class="modal-body">
           <div class="mb-3">
-            <label for="no_anggota" class="form-label">Nomor Anggota</label>
+            <label for="no_anggota" class="form-label">Nomor Induk</label>
             <input type="number" class="form-control" id="no_anggota" name="no_anggota" required />
           </div>
           <div class="mb-3">

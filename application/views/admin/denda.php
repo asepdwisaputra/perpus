@@ -115,7 +115,7 @@
                   <tr>
                     <th>No</th>
                     <th>Nama Peminjam</th>
-                    <th>Nomor Anggota</th>
+                    <th>Nomor Induk</th>
                     <th>Judul Buku</th>
                     <th>ID Buku</th>
                     <th>Tanggal Kembali</th>
