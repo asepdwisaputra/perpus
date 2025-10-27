@@ -16,7 +16,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
     <style>
         body {
-            background: linear-gradient(135deg, #0d6efd, #6610f2);
+            background: linear-gradient(135deg, #005b37ff, #00ff08ff);
             min-height: 100vh;
             display: flex;
             align-items: center;
