@@ -129,13 +129,14 @@
           alt="Slide 1"
           style="max-height: 400px; object-fit: cover" />
       </div>
-      <div class="carousel-item">
+      <!-- Carousel 2 OFF dulu request dosen Erfan background merah tidak ciamik -->
+      <!-- <div class="carousel-item">
         <img
           src="<?php echo base_url('assets/img/banner2.webp'); ?>"
           class="d-block w-100"
           alt="Slide 2"
           style="max-height: 400px; object-fit: cover" />
-      </div>
+      </div> -->
     </div>
 
     <!-- Controls -->
