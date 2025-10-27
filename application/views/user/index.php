@@ -31,7 +31,7 @@
     }
 
     .footer {
-      background-color: #0d6efd;
+      background-color: #03be00ff;
       color: white;
       padding: 50px 0 20px;
     }
@@ -75,7 +75,7 @@
   <!-- Navbar -->
   <nav
     class="navbar navbar-expand-lg navbar-dark"
-    style="background: linear-gradient(90deg, #0d6efd, #6610f2)">
+    style="background: #03be00ff">
     <div class="container">
       <a
         class="navbar-brand d-flex align-items-center fw-bold"
@@ -84,10 +84,10 @@
         <img
           src="<?php echo base_url('assets/img/logoSMP.webp'); ?>"
           alt="Logo"
-          width="45"
-          height="45"
+          width="30"
+          height="30"
           class="me-2 rounded-circle shadow" />
-        <span class="text-white">Perpustakaan Barul 'Ulum</span>
+        <span class="text-white" style="font-size: small;">Perpustakaan SMP Istiqomah Sambas</span>
       </a>
       <button
         class="navbar-toggler border-0"
@@ -314,7 +314,7 @@
   </section>
 
   <!-- Footer + Hubungi Kami -->
-  <footer class="footer text-white bg-primary pt-5">
+  <footer class="footer text-white pt-5" style="background-color: #03be00ff;">
     <div class="container">
       <div class="row text-center text-md-start">
         <div class="col-md-4 mb-4">

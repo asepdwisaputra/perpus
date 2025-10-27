@@ -46,7 +46,7 @@
 </head>
 
 <body>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #03be00ff;">
     <div class="container">
       <a class="navbar-brand" href="<?= base_url() ?>">← Kembali</a>
       <span class="navbar-text text-white">Katalog Buku</span>
