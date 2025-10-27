@@ -33,6 +33,7 @@ class Buku extends CI_Controller
             'penerbit' => $this->input->post('penerbit'),
             'rak'      => $this->input->post('rak'),
             'stock'      => $this->input->post('stock'),
+            'isbn'      => $this->input->post('isbn'),
         ];
 
         // Cek apakah ID Buku sudah terdaftar
@@ -118,6 +119,7 @@ class Buku extends CI_Controller
             'penerbit' => $this->input->post('penerbit'),
             'rak'      => $this->input->post('rak'),
             'stock'      => $this->input->post('stock'),
+            'isbn'      => $this->input->post('isbn'),
         ];
 
         $this->db->where('no_buku', $no_buku_lama);

@@ -124,6 +124,7 @@
                     <th>Penerbit</th>
                     <th>Rak</th>
                     <th>Stock</th>
+                    <th>ISBN</th>
                     <th>Aksi</th>
                   </tr>
                 </thead>
@@ -138,6 +139,7 @@
                       <td><?= $row->penerbit ?></td>
                       <td><?= $row->rak ?></td>
                       <td><?= $row->stock ?></td>
+                      <td><?= $row->ISBN ?></td>
                       <td>
                         <!-- Tombol Edit -->
                         <!-- <button
@@ -298,6 +300,16 @@
               </div>
 
               <div class="mb-3">
+                <label class="form-label">No ISBN</label>
+                <input type="number"
+                  name="isbn"
+                  class="form-control"
+                  placeholder="Masukkan Nomor ISBN"
+                  value="<?= isset($old_input['isbn']) ? $old_input['isbn'] : '' ?>"
+                  required />
+              </div>
+
+              <div class="mb-3">
                 <label class="form-label">Stock</label>
                 <input type="number"
                   name="stock"
@@ -349,6 +361,10 @@
               <div class="mb-3">
                 <label>No Rak</label>
                 <input type="number" class="form-control" name="rak" id="editRak" required>
+              </div>
+              <div class="mb-3">
+                <label>No ISBN</label>
+                <input type="number" class="form-control" name="isbn" id="editisbn" required>
               </div>
               <div class="mb-3">
                 <label>Stock Buku</label>
