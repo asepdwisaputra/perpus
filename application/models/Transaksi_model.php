@@ -31,4 +31,24 @@ class Transaksi_model extends CI_Model
         $this->db->group_end();
         return $this->db->get()->result();
     }
+
+    public function get_transaksi_dipinjam()
+    {
+        $this->db->select('
+        transaksi.id_transaksi,
+        transaksi.id_buku,
+        transaksi.id_anggota,
+        transaksi.tanggal_pinjam,
+        transaksi.tanggal_kembali,
+        transaksi.status,
+        anggota.nama,
+        anggota.telepon,
+        buku.judul
+    ');
+        $this->db->from('transaksi');
+        $this->db->join('anggota', 'anggota.id_anggota = transaksi.id_anggota');
+        $this->db->join('buku', 'buku.id_buku = transaksi.id_buku');
+        $this->db->where('transaksi.status', 'Dipinjam');
+        return $this->db->get()->result();
+    }
 }
