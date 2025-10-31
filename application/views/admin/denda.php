@@ -86,10 +86,38 @@
           <div class="card-header bg-danger text-white d-flex align-items-center gap-2 flex-nowrap">
 
             <!-- Tombol Unduh -->
-            <a href="<?= base_url('denda/export_csv') ?>" class="btn btn-light flex-shrink-0">
+            <button type="button" class="btn btn-light flex-shrink-0" data-bs-toggle="modal" data-bs-target="#modalUnduh">
               <i class="bi bi-download"></i>
-              <span class="d-none d-md-inline">Unduh Data</span>
-            </a>
+              <span class="d-none d-md-inline">Unduh Laporan</span>
+            </button>
+
+            <!-- Modal Pilih Periode -->
+            <div class="modal fade" id="modalUnduh" tabindex="-1" aria-labelledby="modalUnduhLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="modalUnduhLabel">Pilih Periode Laporan</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    <div class="d-grid gap-2">
+                      <a href="<?= base_url('denda/export_pdf') ?>" class="btn btn-primary btn-lg d-flex align-items-center justify-content-center">
+                        <i class="bi bi-calendar-day me-2"></i> Harian
+                      </a>
+                      <a href="<?= base_url('denda/export_pdf_mingguan') ?>" class="btn btn-success btn-lg d-flex align-items-center justify-content-center">
+                        <i class="bi bi-calendar-week me-2"></i> Mingguan
+                      </a>
+                      <a href="<?= base_url('denda/export_pdf_bulanan') ?>" class="btn btn-warning btn-lg d-flex align-items-center justify-content-center">
+                        <i class="bi bi-calendar-month me-2"></i> Bulanan
+                      </a>
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                  </div>
+                </div>
+              </div>
+            </div>
 
 
             <!-- Input Pencarian -->

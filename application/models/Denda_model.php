@@ -55,4 +55,46 @@ class Denda_model extends CI_Model
         // Eksekusi dan kembalikan hasilnya
         return $this->db->get()->result();
     }
+
+    public function get_transaksi_terlambat_mingguan()
+    {
+        // Tanggal hari ini dan 7 hari ke belakang
+        $today = date('Y-m-d');
+        $start_date = date('Y-m-d', strtotime('-7 days', strtotime($today)));
+
+        // Ambil transaksi yang masih "Dipinjam" dan terlambat dalam 7 hari terakhir
+        $this->db->select('transaksi.*, anggota.nama AS nama_peminjam, anggota.no_anggota, buku.judul AS judul_buku, buku.no_buku');
+        $this->db->from('transaksi');
+        $this->db->join('anggota', 'anggota.id_anggota = transaksi.id_anggota');
+        $this->db->join('buku', 'buku.id_buku = transaksi.id_buku');
+        $this->db->where('transaksi.status', 'Dipinjam');
+        $this->db->where('transaksi.tanggal_kembali <', $today);
+        $this->db->where('transaksi.tanggal_kembali >=', $start_date);
+
+        return $this->db->get()->result();
+    }
+
+    public function get_transaksi_terlambat_bulanan()
+    {
+        $today = date('Y-m-d');
+        $bulan_ini = date('m');
+        $tahun_ini = date('Y');
+
+        $this->db->select('
+        transaksi.*, 
+        anggota.nama AS nama_peminjam, 
+        anggota.no_anggota, 
+        buku.judul AS judul_buku, 
+        buku.no_buku
+    ');
+        $this->db->from('transaksi');
+        $this->db->join('anggota', 'anggota.id_anggota = transaksi.id_anggota');
+        $this->db->join('buku', 'buku.id_buku = transaksi.id_buku');
+        $this->db->where('transaksi.status', 'Dipinjam');
+        $this->db->where('MONTH(transaksi.tanggal_kembali)', $bulan_ini);
+        $this->db->where('YEAR(transaksi.tanggal_kembali)', $tahun_ini);
+        $this->db->where('transaksi.tanggal_kembali <', $today);
+
+        return $this->db->get()->result();
+    }
 }
